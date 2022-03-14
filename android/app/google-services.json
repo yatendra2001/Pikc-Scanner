@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "285583574912",
+    "project_id": "pikc-scanner",
+    "storage_bucket": "pikc-scanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285583574912:android:42059b4ac7ceb9f1ef2365",
+        "android_client_info": {
+          "package_name": "com.superawesomeapps.pikc_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285583574912-aaq8ldb6eua8ssug7sb84qr4l8nvm713.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.superawesomeapps.pikc_app",
+            "certificate_hash": "1e4d43531e1920997d4fbc10c8c6151292d70ad3"
+          }
+        },
+        {
+          "client_id": "285583574912-bjihkji9um2siq89qgr2fi4ugo3e7pu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0tuYfGTyFZp3jTAT_hwwgR3JbBZ78JAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285583574912-bjihkji9um2siq89qgr2fi4ugo3e7pu7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
