@@ -22,6 +22,9 @@ dependencies:
   google_ml_kit: ^0.7.3
   intl_phone_field: ^3.0.1
   font_awesome_flutter: ^9.2.0
+  google_sign_in: ^5.2.4
+  flutter_bloc: ^7.0.0
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:

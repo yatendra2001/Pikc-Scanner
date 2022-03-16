@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:pikc_app/blocs/auth/auth_bloc.dart';
 import 'package:pikc_app/utils/assets_constants.dart';
 import 'package:pikc_app/utils/theme_constants.dart';
 
@@ -72,7 +74,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 45.0,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      BlocProvider.of<AuthBloc>(context)
+                          .add(OtpSignInEvent(phone: mobileNumber ?? ' '));
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0)),
@@ -102,35 +107,83 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 30),
                 const Text('or', style: TextStyle(color: kColorWhite)),
                 const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _socialLoginButton(
-                      faIcon: FontAwesomeIcons.google,
-                      onPressed: () {
-                        print('google button');
-                      },
+                SizedBox(
+                  height: 45.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      BlocProvider.of<AuthBloc>(context)
+                          .add(OtpSignInEvent(phone: mobileNumber ?? ' '));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: const EdgeInsets.all(0.0)),
+                    child: Container(
+                      constraints: BoxConstraints(
+                          maxWidth: size.width * 0.65, minHeight: 50.0),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              kGradientStartingColor,
+                              kGradientEndingColor
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const [
+                          Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.google,
+                              color: kColorWhite,
+                              size: 20,
+                            ),
+                          ),
+                          Text(
+                            'Continue',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: kColorWhite),
+                          ),
+                        ],
+                      ),
                     ),
-                    _socialLoginButton(
-                      faIcon: FontAwesomeIcons.apple,
-                      onPressed: () {
-                        print('apple button');
-                      },
-                    ),
-                    _socialLoginButton(
-                      faIcon: FontAwesomeIcons.facebookF,
-                      onPressed: () {
-                        print('facebook button');
-                      },
-                    ),
-                    _socialLoginButton(
-                      faIcon: FontAwesomeIcons.solidEnvelope,
-                      onPressed: () {
-                        print('mail button');
-                      },
-                    ),
-                  ],
+                  ),
                 ),
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     _socialLoginButton(
+                //       faIcon: FontAwesomeIcons.google,
+                //       onPressed: () {
+                //         BlocProvider.of<AuthBloc>(context)
+                //             .add(GoogleSignInEvent());
+                //       },
+                //     ),
+                //     // _socialLoginButton(
+                //     //   faIcon: FontAwesomeIcons.apple,
+                //     //   onPressed: () {
+                //     //     print('apple button');
+                //     //   },
+                //     // ),
+                //     // _socialLoginButton(
+                //     //   faIcon: FontAwesomeIcons.facebookF,
+                //     //   onPressed: () {
+                //     //     print('facebook button');
+                //     //   },
+                //     // ),
+                //     _socialLoginButton(
+                //       faIcon: FontAwesomeIcons.solidEnvelope,
+                //       onPressed: () {
+                //         print('mail button');
+                //       },
+                //     ),
+                //   ],
+                // ),
               ],
             ),
             Column(
