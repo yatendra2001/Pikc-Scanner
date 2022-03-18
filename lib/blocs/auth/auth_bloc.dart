@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:pikc_app/repositories/auth/auth_repository.dart';
 import 'package:pikc_app/utils/session_helper.dart';
 
@@ -27,6 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         SessionHelper.email = user.email;
         SessionHelper.uid = FirebaseAuth.instance.currentUser!.uid;
         SessionHelper.phone = FirebaseAuth.instance.currentUser!.phoneNumber;
+        print("Sign In Success");
         yield check ? SignInSuccessState() : SignInDataEmptyState();
       } catch (e) {
         yield SignInFailedState(message: e.toString());
@@ -52,8 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         yield SendingOTPState();
         final isOtpSent = await authRepository.sendOTP(phone: event.phone);
-        debugPrint(
-            "Send otp complete:  + + ${event.phone} + $isOtpSent.toString()");
+        debugPrint("Send otp complete: ${event.phone}  $isOtpSent.toString()");
         SessionHelper.phone = event.phone;
         yield SentOTPState();
       } catch (e) {

@@ -25,6 +25,7 @@ dependencies:
   google_sign_in: ^5.2.4
   flutter_bloc: ^7.0.0
   equatable: ^2.0.3
+  image_cropper: ^1.5.0
 
 dev_dependencies:
   flutter_test:
