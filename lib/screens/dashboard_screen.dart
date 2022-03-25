@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pikc_app/blocs/auth/auth_bloc.dart';
 import 'package:pikc_app/blocs/ocr/ocr_bloc.dart';
 import 'package:pikc_app/utils/image_helper.dart';
 import 'package:pikc_app/utils/theme_constants.dart';
@@ -17,6 +18,15 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kScaffoldBackgroundColor,
+        appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () {
+                  BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
+                },
+                icon: Icon(Icons.logout))
+          ],
+        ),
         body: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

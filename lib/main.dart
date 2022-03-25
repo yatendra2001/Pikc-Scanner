@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pikc_app/blocs/app_init/app_init_bloc.dart';
 import 'package:pikc_app/blocs/auth/auth_bloc.dart';
 import 'package:pikc_app/blocs/ocr/ocr_bloc.dart';
 import 'package:pikc_app/config/named_routes_map.dart';
@@ -35,6 +36,11 @@ class MyApp extends StatelessWidget {
           BlocProvider<OcrBloc>(
             create: (context) => OcrBloc(
               ocrRepository: context.read<OcrRepository>(),
+            ),
+          ),
+          BlocProvider<AppInitBloc>(
+            create: (context) => AppInitBloc(
+              authRepository: context.read<AuthRepository>(),
             ),
           ),
         ],

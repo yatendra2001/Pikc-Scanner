@@ -67,11 +67,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         debugPrint("User uid: ${userCredential.user?.uid}");
         debugPrint(
             "Current User uid: ${FirebaseAuth.instance.currentUser!.uid}");
-        final check = authRepository.checkUserDataExists(
+        final check = await authRepository.checkUserDataExists(
             userId: FirebaseAuth.instance.currentUser!.uid);
         SessionHelper.displayName = userCredential.user!.displayName;
         SessionHelper.email = userCredential.user!.email;
         SessionHelper.uid = userCredential.user!.phoneNumber;
+        yield check ? SignInSuccessState() : SignInDataEmptyState();
       } catch (e) {
         yield SignInFailedState(message: e.toString());
       }

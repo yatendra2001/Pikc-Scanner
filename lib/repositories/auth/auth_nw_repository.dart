@@ -2,11 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 class AuthNwRepository {
   GoogleSignIn _googleSignIn = GoogleSignIn();
   final auth = FirebaseAuth.instance;
   final usersRef = FirebaseFirestore.instance.collection('users');
+
+  Stream<firebase_auth.User?> get user => auth.userChanges();
+
   Future<GoogleSignInAccount> signInByGoogle() async {
     try {
       final user = await _googleSignIn.signIn();

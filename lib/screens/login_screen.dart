@@ -5,7 +5,9 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:pikc_app/blocs/auth/auth_bloc.dart';
 import 'package:pikc_app/screens/screens.dart';
 import 'package:pikc_app/utils/assets_constants.dart';
+import 'package:pikc_app/utils/session_helper.dart';
 import 'package:pikc_app/utils/theme_constants.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '\login-screen';
@@ -17,6 +19,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   String? mobileNumber;
+
+  @override
+  void initState() {
+    SmsAutoFill().listenForCode();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +92,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         BlocProvider.of<AuthBloc>(context)
                             .add(OtpSignInEvent(phone: mobileNumber ?? ' '));
+
+                        _otpBottomSheet(context);
                       },
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -220,6 +230,52 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _otpBottomSheet(context) {
+    String _code = "";
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+        backgroundColor: kScaffoldBackgroundColor,
+        isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is VerifyingOTPState) {
+                child:
+                Center(child: CircularProgressIndicator());
+              }
+            },
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: PinFieldAutoFill(
+                  autoFocus: true,
+                  keyboardType: TextInputType.number,
+                  decoration: const UnderlineDecoration(
+                    textStyle: TextStyle(fontSize: 20, color: Colors.white),
+                    colorBuilder: FixedColorBuilder(kGradientStartingColor),
+                    lineStrokeCap: StrokeCap.square,
+                  ),
+                  currentCode: _code,
+                  onCodeSubmitted: (code) {},
+                  onCodeChanged: (code) {
+                    if (code!.length == 6) {
+                      _code = code;
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      SessionHelper.phone = SessionHelper.phone!;
+                      BlocProvider.of<AuthBloc>(context)
+                          .add(OtpVerifyEvent(otp: _code));
+                    }
+                  },
+                ),
+              ),
+            ),
+          );
+        });
   }
 
   TextButton _socialLoginButton(

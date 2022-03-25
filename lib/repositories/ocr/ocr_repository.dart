@@ -15,10 +15,9 @@ class OcrRepository extends BaseOcrRepository {
       final RecognisedText recognisedText =
           await textDetector.processImage(inputImage);
       String text = recognisedText.text.trim();
-      String newText = text.replaceAll(RegExp(r'[^\w\s]+'), '');
-      var wordsInText = newText.split(' ');
+      String newText = text.replaceAll(' ', '');
+      List<String> wordsInText = newText.toUpperCase().split(',');
       print(wordsInText);
-      print("Image to text is :" + text);
     } on FirebaseException catch (e) {
       debugPrint(e.message);
     }

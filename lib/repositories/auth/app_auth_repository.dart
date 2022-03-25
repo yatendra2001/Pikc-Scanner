@@ -7,6 +7,12 @@ import 'auth_repository.dart';
 
 class AppAuthRepository extends AuthRepository {
   final _authNwRepository = AuthNwRepository();
+
+  @override
+  Stream<User?> get user {
+    return _authNwRepository.user;
+  }
+
   @override
   Future<GoogleSignInAccount> signInByGoogle() {
     return _authNwRepository.signInByGoogle();
