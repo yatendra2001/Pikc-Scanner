@@ -1,4 +1,6 @@
+import 'package:equatable/equatable.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikc_app/blocs/app_init/app_init_bloc.dart';
@@ -13,6 +15,8 @@ import 'package:pikc_app/repositories/ocr/ocr_repository.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  EquatableConfig.stringify = kDebugMode;
+  Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }
 
@@ -55,5 +59,26 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class SimpleBlocObserver extends BlocObserver {
+  @override
+  void onEvent(Bloc bloc, Object? event) {
+    print(event);
+    super.onEvent(bloc, event!);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    print(transition);
+    super.onTransition(bloc, transition);
+  }
+
+  @override
+  Future<void> onError(
+      BlocBase bloc, Object error, StackTrace stackTrace) async {
+    print(error);
+    super.onError(bloc, error, stackTrace);
   }
 }

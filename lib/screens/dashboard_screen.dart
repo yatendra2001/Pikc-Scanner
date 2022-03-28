@@ -19,12 +19,18 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: kScaffoldBackgroundColor,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          backgroundColor: kScaffoldBackgroundColor,
           actions: [
-            IconButton(
-                onPressed: () {
-                  BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
-                },
-                icon: Icon(Icons.logout))
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: IconButton(
+                  onPressed: () {
+                    BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
+                  },
+                  icon: Icon(Icons.logout)),
+            )
           ],
         ),
         body: Center(
