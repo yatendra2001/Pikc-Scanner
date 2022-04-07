@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:pikc_app/utils/session_helper.dart';
 
 import '../../repositories/auth/auth_repository.dart';
 
@@ -31,14 +33,19 @@ class AppInitBloc extends Bloc<AppInitEvent, AppInitState> {
     if (event is AuthUserChanged) {
       yield* _mapAuthUserChangedToState(event);
     } else if (event is AuthLogoutRequested) {
-      await _authRepository.signOut();
+      await _authRepository.logOut();
     }
   }
 
   Stream<AppInitState> _mapAuthUserChangedToState(
       AuthUserChanged event) async* {
-    yield event.user != null
-        ? AppInitState.authenticated(user: event.user!)
-        : AppInitState.unauthenticated();
+    if (event.user != null) {
+      SessionHelper.displayName = event.user!.displayName;
+      SessionHelper.phone = event.user!.phoneNumber;
+      SessionHelper.uid = event.user!.uid;
+      yield AppInitState.authenticated(user: event.user!);
+    } else {
+      yield AppInitState.unauthenticated();
+    }
   }
 }

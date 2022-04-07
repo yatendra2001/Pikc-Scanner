@@ -1,4 +1,4 @@
-List<String> toxicChemicalsList = [
+List<String> kToxicChemicalsList = [
   "1,4-DIOXANE",
   "ACRYLATES",
   "BENZOPHENONE",

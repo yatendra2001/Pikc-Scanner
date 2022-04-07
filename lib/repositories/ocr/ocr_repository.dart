@@ -5,21 +5,24 @@ import 'package:google_ml_kit/src/vision/vision.dart';
 import 'dart:io';
 
 import 'package:pikc_app/repositories/ocr/base_ocr_repository.dart';
+import 'package:pikc_app/utils/chemicals_list_constant.dart';
 
 class OcrRepository extends BaseOcrRepository {
   @override
-  Future<void> getTextFromImage({required File file}) async {
-    try {
-      final inputImage = InputImage.fromFile(file);
-      final textDetector = GoogleMlKit.vision.textDetector();
-      final RecognisedText recognisedText =
-          await textDetector.processImage(inputImage);
-      String text = recognisedText.text.trim();
-      String newText = text.replaceAll(' ', '');
-      List<String> wordsInText = newText.toUpperCase().split(',');
-      print(wordsInText);
-    } on FirebaseException catch (e) {
-      debugPrint(e.message);
+  Future<List<String>> getTextFromImage({required File file}) async {
+    final inputImage = InputImage.fromFile(file);
+    final textDetector = GoogleMlKit.vision.textDetector();
+    final RecognisedText recognisedText =
+        await textDetector.processImage(inputImage);
+    String text = recognisedText.text.trim();
+    String newText = text.replaceAll(' ', '');
+    List<String> wordsInText = newText.toUpperCase().split(',');
+    List<String> toxicChemicalsList = [];
+    for (var str in wordsInText) {
+      if (kToxicChemicalsList.contains(str)) {
+        toxicChemicalsList.add(str);
+      }
     }
+    return toxicChemicalsList;
   }
 }
