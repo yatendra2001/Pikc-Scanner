@@ -41,6 +41,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/animations/
 
   fonts:
     - family: Quicksand

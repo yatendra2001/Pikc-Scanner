@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pikc_app/utils/theme_constants.dart';
 
 class ImageHelper {
   static Future<File?> pickFromSource({
@@ -18,13 +19,13 @@ class ImageHelper {
         cropStyle: cropStyle,
         androidUiSettings: AndroidUiSettings(
           toolbarTitle: title,
-          toolbarColor: Theme.of(context).primaryColor,
+          toolbarColor: kScaffoldBackgroundColor,
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
         ),
         iosUiSettings: const IOSUiSettings(),
-        compressQuality: 70,
+        compressQuality: 100,
       );
       return croppedFile!;
     }

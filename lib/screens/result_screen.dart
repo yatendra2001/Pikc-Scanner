@@ -12,48 +12,46 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<OcrBloc, OcrState>(listener: (context, state) {
-      if (state.ocrStatus == OcrStatus.started ||
-          state.scannedChemicalsList.isEmpty) {
-        const CircularProgressIndicator();
-      } else if (state.ocrStatus == OcrStatus.failed) {
-        ErrorDialog(content: state.failure.message);
-      }
-    }, builder: (context, state) {
-      return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-          backgroundColor: kScaffoldBackgroundColor,
-          centerTitle: true,
-          title: Text("${state.scannedChemicalsList.length} harmful chemicals"),
-        ),
-        body: SafeArea(
-          child: state.scannedChemicalsList.isNotEmpty
-              ? ListView.builder(
-                  itemCount: state.scannedChemicalsList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 5,
-                      child: ListTile(
-                        title: Text(
-                          state.scannedChemicalsList[index].capitalize(),
-                          style: const TextStyle(color: Colors.redAccent),
+    return BlocBuilder<OcrBloc, OcrState>(builder: (context, state) {
+      if (state.ocrStatus == OcrStatus.failed) {
+        return ErrorDialog(content: state.failure.message);
+      } else if (state.ocrStatus == OcrStatus.completed) {
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: true,
+            backgroundColor: kScaffoldBackgroundColor,
+            centerTitle: true,
+            title:
+                Text("${state.scannedChemicalsList.length} harmful chemicals"),
+          ),
+          body: SafeArea(
+            child: state.scannedChemicalsList.isNotEmpty
+                ? ListView.builder(
+                    itemCount: state.scannedChemicalsList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        elevation: 5,
+                        child: ListTile(
+                          title: Text(
+                            state.scannedChemicalsList[index].capitalize(),
+                            style: const TextStyle(color: Colors.redAccent),
+                          ),
+                          trailing: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.info_rounded,
+                                  color: kScaffoldBackgroundColor, size: 30)),
                         ),
-                        trailing: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.info_rounded,
-                                color: kScaffoldBackgroundColor, size: 30)),
-                      ),
-                    );
-                  })
-              : Center(
-                  child: Lottie.network(
-                      "https://assets7.lottiefiles.com/packages/lf20_oaw8d1yt.json",
-                      repeat: false),
-                ),
-        ),
-      );
+                      );
+                    })
+                : Center(
+                    child: Lottie.asset("assets/animations/lottie_success.json",
+                        repeat: true, frameRate: FrameRate(10000)),
+                  ),
+          ),
+        );
+      }
+      return const Center(child: CircularProgressIndicator());
     });
   }
 }
