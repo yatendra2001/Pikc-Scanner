@@ -31,7 +31,7 @@ class DashboardScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hi, ${SessionHelper.displayName!.split(' ')[0]}",
+                    "Hi, ${SessionHelper.displayName?.split(' ')[0] ?? ' '}",
                     style: const TextStyle(
                       fontWeight: FontWeight.w800,
                       color: kColorWhite,

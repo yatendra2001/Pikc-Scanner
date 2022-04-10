@@ -46,7 +46,7 @@ class ResultScreen extends StatelessWidget {
                     })
                 : Center(
                     child: Lottie.asset("assets/animations/lottie_success.json",
-                        repeat: true, frameRate: FrameRate(10000)),
+                        repeat: false),
                   ),
           ),
         );

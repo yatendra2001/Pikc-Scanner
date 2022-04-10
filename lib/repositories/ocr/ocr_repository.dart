@@ -13,6 +13,7 @@ class OcrRepository extends BaseOcrRepository {
         await textDetector.processImage(inputImage);
     String text = recognisedText.text.trim();
     String newText = text.replaceAll(' ', '');
+    newText = newText.replaceAll('.', ',');
     List<String> wordsInText = newText.toUpperCase().split(',');
     List<String> toxicChemicalsList = [];
     for (String str in wordsInText) {

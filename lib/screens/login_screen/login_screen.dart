@@ -19,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   String? mobileNumber;
+  String? otp;
 
   @override
   void initState() {
@@ -140,7 +141,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _otpBottomSheet(context) {
-    String _code = "";
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
@@ -157,28 +157,31 @@ class _LoginScreenState extends State<LoginScreen> {
             },
             child: Padding(
               padding: MediaQuery.of(context).viewInsets,
-              child: Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: PinFieldAutoFill(
-                  autoFocus: true,
-                  keyboardType: TextInputType.number,
-                  decoration: const UnderlineDecoration(
-                    textStyle: TextStyle(fontSize: 20, color: Colors.white),
-                    colorBuilder: FixedColorBuilder(kGradientStartingColor),
-                    lineStrokeCap: StrokeCap.square,
+              child: Wrap(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: PinFieldAutoFill(
+                      autoFocus: true,
+                      keyboardType: TextInputType.number,
+                      decoration: const UnderlineDecoration(
+                        textStyle: TextStyle(fontSize: 20, color: Colors.white),
+                        colorBuilder: FixedColorBuilder(Colors.white),
+                        lineStrokeCap: StrokeCap.square,
+                      ),
+                      currentCode: otp,
+                      onCodeSubmitted: (code) {},
+                      onCodeChanged: (code) {
+                        if (code!.length == 6) {
+                          otp = code;
+                          BlocProvider.of<LoginCubit>(context)
+                              .verifyOtp(otp: otp!);
+                          FocusScope.of(context).requestFocus(FocusNode());
+                        }
+                      },
+                    ),
                   ),
-                  currentCode: _code,
-                  onCodeSubmitted: (code) {},
-                  onCodeChanged: (code) {
-                    if (code!.length == 6) {
-                      _code = code;
-                      SessionHelper.phone = SessionHelper.phone!;
-                      BlocProvider.of<LoginCubit>(context)
-                          .verifyOtp(otp: _code);
-                      FocusScope.of(context).requestFocus(FocusNode());
-                    }
-                  },
-                ),
+                ],
               ),
             ),
           );
