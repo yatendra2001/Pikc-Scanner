@@ -8,3 +8,22 @@ Designed and Developed a mobile application that scans ingredients behind the pr
 
 
 [App Video](https://youtu.be/LrnHIeX0i8I)
+
+## Usage
+
+1. Clone the repository from GitHub:
+
+```bash
+git clone https://github.com/yatendra2001/Pikc-Scanner.git
+```
+
+2. Get all dependencies:
+```bash
+flutter pub get
+```
+
+3. Run the app:
+
+```bash
+flutter run
+```
