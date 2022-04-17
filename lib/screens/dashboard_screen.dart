@@ -38,6 +38,15 @@ class DashboardScreen extends StatelessWidget {
                       fontSize: 30,
                     ),
                   ),
+                  const Text(
+                    "We are working towards making Pikc more accurate, and customisable where you can verify if a product is per your diet or not through the nutritional value given behind it. \n\nUntil then keep yourself safe and healthy. 🥳",
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: kColorWhite,
+                      fontSize: 12,
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -131,7 +140,8 @@ class DashboardScreen extends StatelessWidget {
                               .read<AppInitBloc>()
                               .add(AuthLogoutRequested());
                         }),
-                  )
+                  ),
+                  SizedBox(height: 20),
                 ],
               ),
             ),

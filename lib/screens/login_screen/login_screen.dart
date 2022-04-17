@@ -8,6 +8,7 @@ import 'package:sms_autofill/sms_autofill.dart';
 import 'package:pikc_app/utils/assets_constants.dart';
 import 'package:pikc_app/utils/session_helper.dart';
 import 'package:pikc_app/utils/theme_constants.dart';
+import 'package:timer_button/timer_button.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login-screen';
@@ -25,6 +26,69 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     SmsAutoFill().listenForCode();
     super.initState();
+  }
+
+  void _otpBottomSheet(context) {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+        backgroundColor: kScaffoldBackgroundColor,
+        isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return BlocListener<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if (state.status == LoginStatus.submitting) {
+                const Center(child: CircularProgressIndicator());
+              }
+            },
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Wrap(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: PinFieldAutoFill(
+                      autoFocus: true,
+                      keyboardType: TextInputType.number,
+                      decoration: const UnderlineDecoration(
+                        textStyle: TextStyle(fontSize: 20, color: Colors.white),
+                        colorBuilder: FixedColorBuilder(Colors.white),
+                        lineStrokeCap: StrokeCap.square,
+                      ),
+                      currentCode: otp,
+                      onCodeSubmitted: (code) {},
+                      onCodeChanged: (code) {
+                        if (code!.length == 6) {
+                          otp = code;
+                          BlocProvider.of<LoginCubit>(context)
+                              .verifyOtp(otp: otp!);
+                          FocusScope.of(context).requestFocus(FocusNode());
+                        }
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.center,
+                    child: TimerButton(
+                      label: 'Resend',
+                      onPressed: () {
+                        BlocProvider.of<LoginCubit>(context)
+                            .sendOtpOnPhone(phone: SessionHelper.phone!);
+                      },
+                      buttonType: ButtonType.RaisedButton,
+                      timeOutInSeconds: 30,
+                      activeTextStyle: TextStyle(color: Color(0xFF3A424D)),
+                      disabledTextStyle: TextStyle(color: kColorWhite),
+                      color: kColorWhite,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   @override
@@ -65,9 +129,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 initialCountryCode: 'IN',
                 disableLengthCheck: true,
                 onChanged: (value) {
-                  setState(() {
-                    mobileNumber = value.completeNumber;
-                  });
+                  if (value.number.length == 10) {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    setState(() {
+                      mobileNumber = value.completeNumber;
+                    });
+                  }
                 },
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -138,53 +205,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  void _otpBottomSheet(context) {
-    showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
-        backgroundColor: kScaffoldBackgroundColor,
-        isScrollControlled: true,
-        context: context,
-        builder: (context) {
-          return BlocListener<LoginCubit, LoginState>(
-            listener: (context, state) {
-              if (state.status == LoginStatus.submitting) {
-                child:
-                const Center(child: CircularProgressIndicator());
-              }
-            },
-            child: Padding(
-              padding: MediaQuery.of(context).viewInsets,
-              child: Wrap(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: PinFieldAutoFill(
-                      autoFocus: true,
-                      keyboardType: TextInputType.number,
-                      decoration: const UnderlineDecoration(
-                        textStyle: TextStyle(fontSize: 20, color: Colors.white),
-                        colorBuilder: FixedColorBuilder(Colors.white),
-                        lineStrokeCap: StrokeCap.square,
-                      ),
-                      currentCode: otp,
-                      onCodeSubmitted: (code) {},
-                      onCodeChanged: (code) {
-                        if (code!.length == 6) {
-                          otp = code;
-                          BlocProvider.of<LoginCubit>(context)
-                              .verifyOtp(otp: otp!);
-                          FocusScope.of(context).requestFocus(FocusNode());
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
   }
 }

@@ -37,10 +37,6 @@ class ResultScreen extends StatelessWidget {
                             state.scannedChemicalsList[index].capitalize(),
                             style: const TextStyle(color: Colors.redAccent),
                           ),
-                          trailing: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.info_rounded,
-                                  color: kScaffoldBackgroundColor, size: 30)),
                         ),
                       );
                     })
