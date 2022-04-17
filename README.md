@@ -1,16 +1,29 @@
-# pikc_app
+# Pikc
 
-A new Flutter project.
+An app that let's you know if the product is harmful or not based on it's ingredients.
 
-## Getting Started
+## Introduction
 
-This project is a starting point for a Flutter application.
+Designed and Developed a mobile application that scans ingredients behind the products and highlights all toxic ingredients. Integrated Google ML kit to retrieve texts from images. Got into Eureka Semi-finals and EY Scholarship finals with this idea.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+[App Video](https://youtu.be/LrnHIeX0i8I)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Usage
+
+1. Clone the repository from GitHub:
+
+```bash
+git clone https://github.com/yatendra2001/Pikc-Scanner.git
+```
+
+2. Get all dependencies:
+```bash
+flutter pub get
+```
+
+3. Run the app:
+
+```bash
+flutter run
+```
