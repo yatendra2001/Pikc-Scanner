@@ -9,6 +9,7 @@ import 'package:pikc_app/utils/assets_constants.dart';
 import 'package:pikc_app/utils/session_helper.dart';
 import 'package:pikc_app/utils/theme_constants.dart';
 import 'package:timer_button/timer_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login-screen';
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       label: 'Resend',
                       onPressed: () {
                         BlocProvider.of<LoginCubit>(context)
-                            .sendOtpOnPhone(phone: SessionHelper.phone!);
+                            .sendOtpOnPhone(phone: mobileNumber!);
                       },
                       buttonType: ButtonType.RaisedButton,
                       timeOutInSeconds: 30,
@@ -200,6 +201,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               const SizedBox(height: 25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "By continuing you agree to our ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 10,
+                        color: kColorWhite.withOpacity(0.8)),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      const url =
+                          'https://noobcommunity.notion.site/Privacy-Policy-c5618d6f22504079af495335d066eb8d';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: Text(
+                      "Privacy Policy",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10,
+                          color: kColorWhite.withOpacity(0.9)),
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         ),

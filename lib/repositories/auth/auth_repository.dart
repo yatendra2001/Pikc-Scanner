@@ -36,50 +36,6 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
-  Future<auth.User> signUpWithEmailAndPassword({
-    required String username,
-    required String email,
-    required String password,
-  }) async {
-    try {
-      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      final user = credential.user;
-      _firebaseFirestore.collection(Paths.users).doc(user!.uid).set({
-        'username': username,
-        'email': email,
-        'followers': 0,
-        'following': 0,
-      });
-      return user;
-    } on auth.FirebaseAuthException catch (err) {
-      throw Failure(code: err.code, message: err.message!);
-    } on PlatformException catch (err) {
-      throw Failure(code: err.code, message: err.message!);
-    }
-  }
-
-  @override
-  Future<auth.User> logInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      final credential = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return credential.user!;
-    } on auth.FirebaseAuthException catch (err) {
-      throw Failure(code: err.code, message: err.message!);
-    } on PlatformException catch (err) {
-      throw Failure(code: err.code, message: err.message!);
-    }
-  }
-
-  @override
   Future<GoogleSignInAccount> signInByGoogle() async {
     try {
       final user = await _googleSignIn.signIn();
@@ -123,6 +79,16 @@ class AuthRepository extends BaseAuthRepository {
     auth.PhoneAuthCredential credential = auth.PhoneAuthProvider.credential(
         verificationId: _verificationId, smsCode: otp);
     return await _firebaseAuth.signInWithCredential(credential);
+  }
+
+  @override
+  Future<void> updateData(
+      {required Map<String, String> json,
+      required String uid,
+      required bool check}) async {
+    check
+        ? _firebaseFirestore.collection(Paths.users).doc(uid).update(json)
+        : _firebaseFirestore.collection(Paths.users).doc(uid).set(json);
   }
 
   @override

@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "285583574912-fnbctfsl9rk4b0hno6jjbhvie5nd2dt6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.superawesomeapps.pikc_app",
+            "certificate_hash": "17c987c067c65a19aef98b53ea6acfbc76903e6a"
+          }
+        },
+        {
           "client_id": "285583574912-bjihkji9um2siq89qgr2fi4ugo3e7pu7.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,6 +45,13 @@
             {
               "client_id": "285583574912-bjihkji9um2siq89qgr2fi4ugo3e7pu7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "285583574912-53ntg7pre9bjbt8902nb17i17l0uecnn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.superawesomeapps.pikcApp"
+              }
             }
           ]
         }
