@@ -214,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   GestureDetector(
                     onTap: () async {
                       const url =
-                          'https://noobcommunity.notion.site/Privacy-Policy-c5618d6f22504079af495335d066eb8d';
+                          'https://github.com/yatendra2001/Pikc-Scanner/blob/master/Privacy-Policy.md';
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
