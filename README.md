@@ -17,7 +17,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/yatendra2001/Pikc-Scanner">
-    <img src="assets/images/pikc_logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/playstore.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Best-README-Template</h3>
@@ -65,15 +65,13 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Need latest flutter version with null safety and android v2 embedding
 * flutter
   ```sh
   flutter upgrade
   ```
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Clone the repository from GitHub:
 
@@ -125,9 +123,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Your Name - [@Yatendr67513831](https://twitter.com/Yatendr67513831) - contact@pikc.tech
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/yatendra2001/Pikc-Scanner](https://github.com/yatendra2001/Pikc-Scanner)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
