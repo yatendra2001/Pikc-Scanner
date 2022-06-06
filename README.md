@@ -17,11 +17,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/yatendra2001/Pikc-Scanner">
-    <img src="assets/playstore.png" alt="Logo" width="80" height="80">
+    <img src="assets/images/pikc_logo.png" >
   </a>
-
-  <h3 align="center">Best-README-Template</h3>
-
   <p align="center">
     An app that let's you know if the product is harmful or not based on it's ingredients.
     <br />
