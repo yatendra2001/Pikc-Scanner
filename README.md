@@ -20,7 +20,7 @@
     <img src="assets/images/pikc_logo.png"  alt="Logo" width="200" height="80" >
   </a>
   <p align="center">
-    An app that let's you know if the product is harmful or not based on it's ingredients.
+    An app that let's you know if a product is harmful or not based on it's ingredients.
     <br />
     <a href="https://youtu.be/LrnHIeX0i8I">View Prototype</a>
   </p>
@@ -57,8 +57,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
