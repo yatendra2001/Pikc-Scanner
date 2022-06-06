@@ -118,7 +118,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@Yatendr67513831](https://twitter.com/Yatendr67513831) - contact@pikc.tech
+Your Name - [@yatendrakumar27](https://twitter.com/yatendrakumar27) - contact@pikc.tech
 
 Project Link: [https://github.com/yatendra2001/Pikc-Scanner](https://github.com/yatendra2001/Pikc-Scanner)
 
