@@ -24,8 +24,8 @@ class ResultScreen extends StatelessWidget {
             title:
                 Text("${state.scannedChemicalsList.length} harmful chemicals"),
           ),
-          body: SafeArea(
-            child: state.scannedChemicalsList.isNotEmpty
+          body: Scaffold(
+            body: state.scannedChemicalsList.isNotEmpty
                 ? ListView.builder(
                     itemCount: state.scannedChemicalsList.length,
                     shrinkWrap: true,

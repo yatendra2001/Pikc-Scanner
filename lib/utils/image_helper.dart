@@ -27,7 +27,7 @@ class ImageHelper {
         iosUiSettings: const IOSUiSettings(),
         compressQuality: 100,
       );
-      return croppedFile!;
+      return File(pickedFile.path);
     }
     return null;
   }

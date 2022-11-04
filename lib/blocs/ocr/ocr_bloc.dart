@@ -22,7 +22,7 @@ class OcrBloc extends Bloc<OcrEvent, OcrState> {
       yield (state.copyWith(ocrStatus: OcrStatus.started));
       try {
         final chemicals =
-            await ocrRepository.getTextFromImage(file: event.file);
+            await ocrRepository.getToxicChemicalsFromImage(file: event.file);
         yield (state.copyWith(
             ocrStatus: OcrStatus.completed, scannedChemicalsList: chemicals));
       } catch (err) {

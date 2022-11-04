@@ -10,6 +10,12 @@ import '../blocs/app_init/app_init_bloc.dart';
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splash-screen';
   const SplashScreen({Key? key}) : super(key: key);
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => SplashScreen(),
+    );
+  }
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
