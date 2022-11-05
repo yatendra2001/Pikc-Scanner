@@ -3,6 +3,7 @@ import 'package:pikc_app/screens/dashboard_screen.dart';
 import 'package:pikc_app/screens/login_screen/login_screen.dart';
 import 'package:pikc_app/screens/login_screen/otp_screen.dart';
 import 'package:pikc_app/screens/login_screen/phone_screen.dart';
+import 'package:pikc_app/screens/screens.dart';
 import 'package:pikc_app/screens/splash_screen.dart';
 
 class RouteGenerator {
@@ -23,6 +24,8 @@ class RouteGenerator {
         return PhoneScreen.route();
       case OtpScreen.routeName:
         return OtpScreen.route();
+      case ResultScreen.routeName:
+        return ResultScreen.route();
       case DashboardScreen.routeName:
         return DashboardScreen.route();
       default:

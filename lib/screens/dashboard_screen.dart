@@ -10,14 +10,16 @@ import 'package:pikc_app/blocs/app_init/app_init_bloc.dart';
 import 'package:pikc_app/blocs/ocr/ocr_bloc.dart';
 import 'package:pikc_app/screens/screens.dart';
 import 'package:pikc_app/screens/widgets/widgets.dart';
+import 'package:pikc_app/utils/assets_constants.dart';
 import 'package:pikc_app/utils/image_helper.dart';
 import 'package:pikc_app/utils/session_helper.dart';
 import 'package:pikc_app/utils/theme_constants.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashboardScreen extends StatelessWidget {
   static const routeName = "/dashboard-screen";
-  const DashboardScreen({Key? key}) : super(key: key);
+  DashboardScreen({Key? key}) : super(key: key);
   static Route route() {
     return PageTransition(
       settings: const RouteSettings(name: routeName),
@@ -26,6 +28,11 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
+  final List<String> greetingList = [
+    "Hello, ${SessionHelper.displayName?.split(' ')[0] ?? ' '} 🙌",
+    "Namaste, ${SessionHelper.displayName?.split(' ')[0] ?? ' '} 🙏",
+    "Wassup, ${SessionHelper.displayName?.split(' ')[0] ?? ' '} 🤙"
+  ];
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -35,13 +42,13 @@ class DashboardScreen extends StatelessWidget {
           if (state.ocrStatus == OcrStatus.started) {
             const Center(
               child: CircularProgressIndicator(
-                backgroundColor: kColorWhite,
+                backgroundColor: kColorBlack,
               ),
             );
           }
         },
         child: Scaffold(
-            backgroundColor: kScaffoldBackgroundColor,
+            backgroundColor: kColorWhite,
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
@@ -49,36 +56,46 @@ class DashboardScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Hi, ${SessionHelper.displayName?.split(' ')[0] ?? ' '}",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: kColorWhite,
-                        fontSize: 30,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          greetingList[Random().nextInt(3)],
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: kColorBlack,
+                                  fontSize: 22.sp),
+                        ),
+                        SizedBox(height: 8),
+                        Text("Welcome To Pikc!",
+                            style: Theme.of(context).textTheme.subtitle1),
+                      ],
                     ),
                     Column(
                       children: [
-                        const Text(
-                          "We are working towards making Pikc more accurate. In upcoming versions, you can expect multiple features including creating customisable lists 📝 , product recommendations 🚀 and scanning nutrition contents based on prescription and diets🍎.",
-                          textAlign: TextAlign.justify,
+                        Text(
+                          "We are working towards making Pikc more accurate. In upcoming versions, you can expect multiple features including : \n\n• Creating Customisable Allergen Lists 📝 \n\n• Product Recommendations 🚀 and \n\n• Scanning Nutrition Contents Based On Prescription And Diets🍎.",
+                          // textAlign: TextAlign,.
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
-                            color: kColorWhite,
-                            fontSize: 12,
+                            color: kColorBlack,
+                            fontSize: 10.sp,
                           ),
                         ),
                         const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Got any idea or suggestion? Mail us at ",
+                            Text(
+                              "Got any suggestion? Mail us at ",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
                                 fontWeight: FontWeight.w400,
-                                color: kColorWhite,
-                                fontSize: 12,
+                                color: kColorBlack,
+                                fontSize: 10.sp,
                               ),
                             ),
                             GestureDetector(
@@ -95,7 +112,7 @@ class DashboardScreen extends StatelessWidget {
                                 style: TextStyle(
                                   decoration: TextDecoration.underline,
                                   fontWeight: FontWeight.w600,
-                                  color: kColorWhite,
+                                  color: kColorBlack,
                                   fontSize: 12,
                                 ),
                               ),
@@ -112,8 +129,8 @@ class DashboardScreen extends StatelessWidget {
                           children: [
                             Center(
                               child: Container(
-                                height: 90,
-                                width: 90,
+                                height: 80.sp,
+                                width: 80.sp,
                                 decoration: BoxDecoration(
                                     gradient: const LinearGradient(
                                       colors: [
@@ -129,8 +146,9 @@ class DashboardScreen extends StatelessWidget {
                                   child: TextButton(
                                     onPressed: () => _selectScanImage(
                                         context, ImageSource.camera),
-                                    child: const FaIcon(
+                                    child: FaIcon(
                                       FontAwesomeIcons.camera,
+                                      size: 25.sp,
                                       color: kColorWhite,
                                     ),
                                   ),
@@ -140,7 +158,7 @@ class DashboardScreen extends StatelessWidget {
                             const SizedBox(height: 15),
                             const Text(
                               "Camera",
-                              style: TextStyle(color: kColorWhite),
+                              style: TextStyle(color: kColorBlack),
                             )
                           ],
                         ),
@@ -149,8 +167,8 @@ class DashboardScreen extends StatelessWidget {
                           children: [
                             Center(
                               child: Container(
-                                height: 90,
-                                width: 90,
+                                height: 80.sp,
+                                width: 80.sp,
                                 decoration: BoxDecoration(
                                     gradient: const LinearGradient(
                                       colors: [
@@ -166,8 +184,9 @@ class DashboardScreen extends StatelessWidget {
                                   child: TextButton(
                                     onPressed: () => _selectScanImage(
                                         context, ImageSource.gallery),
-                                    child: const FaIcon(
+                                    child: FaIcon(
                                       FontAwesomeIcons.image,
+                                      size: 25.sp,
                                       color: kColorWhite,
                                     ),
                                   ),
@@ -177,7 +196,7 @@ class DashboardScreen extends StatelessWidget {
                             const SizedBox(height: 15),
                             const Text(
                               "Photos",
-                              style: TextStyle(color: kColorWhite),
+                              style: TextStyle(color: kColorBlack),
                             )
                           ],
                         ),
@@ -193,9 +212,53 @@ class DashboardScreen extends StatelessWidget {
                             style: TextStyle(color: kColorWhite),
                           ),
                           onPressed: () {
-                            context
-                                .read<AppInitBloc>()
-                                .add(AuthLogoutRequested());
+                            showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: (context) => AlertDialog(
+                                backgroundColor: Colors.grey[50],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  side: const BorderSide(
+                                      color: kColorBlack, width: 2.0),
+                                ),
+                                title: Center(
+                                  child: Text(
+                                    "Are you sure you want to logout?",
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: kColorBlack,
+                                    ),
+                                  ),
+                                ),
+                                actions: [
+                                  OutlinedButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text(
+                                        "No",
+                                        style: TextStyle(
+                                          color: kColorBlack,
+                                          fontSize: 10.sp,
+                                        ),
+                                      )),
+                                  OutlinedButton(
+                                    onPressed: () {
+                                      context
+                                          .read<AppInitBloc>()
+                                          .add(AuthLogoutRequested());
+
+                                      SessionHelperEmpty();
+                                    },
+                                    child: Text(
+                                      "Yes",
+                                      style: TextStyle(
+                                          color: kColorBlack, fontSize: 10.sp),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
                           }),
                     ),
                     SizedBox(height: 20),

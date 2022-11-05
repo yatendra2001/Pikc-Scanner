@@ -1,28 +1,24 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pikc_app/screens/login_screen/cubit/login_cubit.dart';
 import 'package:pikc_app/screens/login_screen/otp_screen.dart';
-import 'package:pikc_app/screens/widgets/widgets.dart';
 import 'package:pikc_app/utils/session_helper.dart';
 import 'package:pikc_app/utils/theme_constants.dart';
 import 'package:sizer/sizer.dart';
 
 class PhoneScreen extends StatefulWidget {
   static const routeName = '/phone-screen';
-  PhoneScreen({Key? key}) : super(key: key);
+  const PhoneScreen({Key? key}) : super(key: key);
   static Route route() {
     return PageTransition(
       settings: const RouteSettings(name: routeName),
       type: PageTransitionType.rightToLeft,
-      child: PhoneScreen(),
+      child: const PhoneScreen(),
     );
   }
 
@@ -94,85 +90,86 @@ class _PhoneScreenState extends State<PhoneScreen> {
             height: 45.h,
             width: double.infinity,
             color: Colors.grey[100],
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
-              child: GridView.count(
-                  childAspectRatio: 2,
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 2.5.h,
-                  crossAxisSpacing: 5.w,
-                  children: [
-                    for (int i = 1; i < 13; i++) ...[
-                      if (i == 10) SizedBox.shrink(),
-                      if (i == 12)
-                        NumberWidget(
-                            numberTile: const Icon(
-                              Icons.backspace,
-                              color: kColorBlack,
-                            ),
-                            onLongPress: () {
-                              if (_phoneTextController.text.isNotEmpty) {
-                                _phoneTextController.text =
-                                    _phoneTextController.text.substring(0, 0);
-                              }
-                            },
-                            onPressed: () {
-                              setState(() {
-                                _phoneTextController.selection =
-                                    _phoneTextController.selection.copyWith(
-                                        extentOffset:
-                                            _phoneTextController.text.length);
-                                if (_phoneTextController.text.isNotEmpty) {
-                                  _phoneTextController.text =
-                                      _phoneTextController.text.substring(0,
-                                          _phoneTextController.text.length - 1);
-                                }
-                              });
-                            }),
-                      if (i == 11)
-                        NumberWidget(
-                            numberTile: Text(
-                              "0",
-                              style: TextStyle(
-                                  color: kColorBlack,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _phoneTextController.selection =
-                                    _phoneTextController.selection.copyWith(
-                                        extentOffset:
-                                            _phoneTextController.text.length);
-                                _phoneTextController.text =
-                                    _phoneTextController.text + "0";
-                              });
-                            }),
-                      if (i != 10 && i != 12 && i != 11)
-                        NumberWidget(
-                            numberTile: Text(
-                              i.toString(),
-                              style: TextStyle(
-                                  color: kColorBlack,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _phoneTextController.selection =
-                                    _phoneTextController.selection.copyWith(
-                                        extentOffset:
-                                            _phoneTextController.text.length);
-                                _phoneTextController.text =
-                                    _phoneTextController.text + i.toString();
-                              });
-                            }),
-                    ]
-                  ]),
-            ),
+            child: _phoneKeypad(),
           )
         ],
       ),
+    );
+  }
+
+  Padding _phoneKeypad() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+      child: GridView.count(
+          childAspectRatio: 2,
+          crossAxisCount: 3,
+          mainAxisSpacing: 1.5.h,
+          crossAxisSpacing: 5.w,
+          children: [
+            for (int i = 1; i < 13; i++) ...[
+              if (i == 10) SizedBox.shrink(),
+              if (i == 12)
+                NumberWidget(
+                    numberTile: const Icon(
+                      Icons.backspace,
+                      color: kColorBlack,
+                    ),
+                    onLongPress: () {
+                      if (_phoneTextController.text.isNotEmpty) {
+                        _phoneTextController.text =
+                            _phoneTextController.text.substring(0, 0);
+                      }
+                    },
+                    onPressed: () {
+                      setState(() {
+                        _phoneTextController.selection =
+                            _phoneTextController.selection.copyWith(
+                                extentOffset: _phoneTextController.text.length);
+                        if (_phoneTextController.text.isNotEmpty) {
+                          _phoneTextController.text = _phoneTextController.text
+                              .substring(
+                                  0, _phoneTextController.text.length - 1);
+                        }
+                      });
+                    }),
+              if (i == 11)
+                NumberWidget(
+                    numberTile: Text(
+                      "0",
+                      style: TextStyle(
+                          color: kColorBlack,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _phoneTextController.selection =
+                            _phoneTextController.selection.copyWith(
+                                extentOffset: _phoneTextController.text.length);
+                        _phoneTextController.text =
+                            _phoneTextController.text + "0";
+                      });
+                    }),
+              if (i != 10 && i != 12 && i != 11)
+                NumberWidget(
+                    numberTile: Text(
+                      i.toString(),
+                      style: TextStyle(
+                          color: kColorBlack,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _phoneTextController.selection =
+                            _phoneTextController.selection.copyWith(
+                                extentOffset: _phoneTextController.text.length);
+                        _phoneTextController.text =
+                            _phoneTextController.text + i.toString();
+                      });
+                    }),
+            ]
+          ]),
     );
   }
 
@@ -198,9 +195,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
           setState(() {
             countryIsoCode = value.countryISOCode;
           });
-          // setState(() {
-          //   mobileNumber = value.completeNumber;
-          // });
         }
       },
       decoration: InputDecoration(
@@ -306,15 +300,12 @@ class NumberWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+        style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                side: BorderSide(color: kColorBlack),
+                borderRadius: BorderRadius.circular(16))),
         onLongPress: onLongPress,
         onPressed: onPressed,
-        // style: TextButton.styleFrom(
-        //   elevation: 0,
-        //   side: BorderSide(
-        //       color: kColorBlack, width: 1, style: BorderStyle.solid),
-        //   shape:
-        //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        // ),
         child: numberTile);
   }
 }

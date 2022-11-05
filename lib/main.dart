@@ -10,6 +10,7 @@ import 'package:pikc_app/config/named_routes_map.dart';
 import 'package:pikc_app/config/route_generator.dart';
 import 'package:pikc_app/repositories/auth/auth_repository.dart';
 import 'package:pikc_app/repositories/ocr/ocr_repository.dart';
+import 'package:pikc_app/screens/nav/cubit/bottom_nav_bar_cubit.dart';
 import 'package:pikc_app/screens/screens.dart';
 import 'package:sizer/sizer.dart';
 
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
               BlocProvider<LoginCubit>(
                 create: (context) =>
                     LoginCubit(authRepository: context.read<AuthRepository>()),
+              ),
+              BlocProvider<BottomNavBarCubit>(
+                create: (context) => BottomNavBarCubit(),
               ),
             ],
             child: MaterialApp(

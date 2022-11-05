@@ -2,28 +2,25 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pikc_app/screens/login_screen/cubit/login_cubit.dart';
-import 'package:pikc_app/screens/widgets/widgets.dart';
+import 'package:pikc_app/screens/widgets/timer_button_widget.dart';
 import 'package:pikc_app/utils/session_helper.dart';
 import 'package:pikc_app/utils/theme_constants.dart';
 import 'package:sizer/sizer.dart';
 import 'package:sms_autofill/sms_autofill.dart';
+import 'package:timer_button/timer_button.dart';
 
 class OtpScreen extends StatefulWidget {
   static const routeName = '/otp-screen';
-  OtpScreen({Key? key}) : super(key: key);
+  const OtpScreen({Key? key}) : super(key: key);
   static Route route() {
     return PageTransition(
       settings: const RouteSettings(name: routeName),
       type: PageTransitionType.rightToLeft,
-      child: OtpScreen(),
+      child: const OtpScreen(),
     );
   }
 
@@ -73,7 +70,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                         color: kColorBlack, fontWeight: FontWeight.w900),
                   ),
-                  SizedBox(height: 2.5.h),
+                  SizedBox(height: 1.5.h),
                   Text(
                     "we've sent you a security code at ${SessionHelper.phone}",
                     style: Theme.of(context)
@@ -81,9 +78,11 @@ class _OtpScreenState extends State<OtpScreen> {
                         .bodyLarge!
                         .copyWith(color: Colors.grey[800]),
                   ),
-                  SizedBox(height: 12.5.h),
+                  SizedBox(height: 6.5.h),
                   _otpField(context),
-                  SizedBox(height: 3.5.h),
+                  SizedBox(height: 3.h),
+                  _didntReceiveCodeMethod(),
+                  SizedBox(height: 1.h),
                   state.status == LoginStatus.otpVerifying ||
                           state.status == LoginStatus.success
                       ? Center(
@@ -252,6 +251,44 @@ class _OtpScreenState extends State<OtpScreen> {
       ),
     );
   }
+
+  Widget _didntReceiveCodeMethod() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Didn't get the code? ",
+          style: TextStyle(
+            fontSize: 10.sp,
+          ),
+        ),
+        // TimerButtonWidget(
+        //   onTimerFinished: () {
+        //     BlocProvider.of<LoginCubit>(context)
+        //         .sendOtpOnPhone(phone: context.read<LoginCubit>().phone);
+        //   },
+        // ),
+        TimerButton(
+          label: 'Resend',
+          onPressed: () {
+            BlocProvider.of<LoginCubit>(context)
+                .sendOtpOnPhone(phone: context.read<LoginCubit>().phone);
+          },
+          timeOutInSeconds: 30,
+          disabledColor: kColorWhite,
+          color: kColorWhite,
+          buttonType: ButtonType.TextButton,
+          disabledTextStyle:
+              TextStyle(color: kColorBlack.withOpacity(0.8), fontSize: 10.sp),
+          activeTextStyle: TextStyle(
+            color: kColorBlack,
+            fontWeight: FontWeight.w600,
+            fontSize: 10.sp,
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 class NumberWidget extends StatelessWidget {
@@ -268,15 +305,13 @@ class NumberWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+        style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                side: BorderSide(color: kColorBlack),
+                borderRadius: BorderRadius.circular(16))),
         onLongPress: onLongPress,
         onPressed: onPressed,
-        // style: TextButton.styleFrom(
-        //   elevation: 0,
-        //   side: BorderSide(
-        //       color: kColorBlack, width: 1, style: BorderStyle.solid),
-        //   shape:
-        //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        // ),
         child: numberTile);
+    ;
   }
 }

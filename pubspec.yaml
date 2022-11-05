@@ -20,9 +20,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^7.0.0
+  fluttertoast: ^8.1.1
   font_awesome_flutter: ^9.2.0
   google_fonts: ^2.3.2
   google_mlkit_text_recognition: ^0.3.0
+  google_nav_bar: ^5.0.6
   google_sign_in: ^5.2.4
   image_cropper: ^1.5.0
   image_picker: ^0.8.4+11

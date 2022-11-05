@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikc_app/screens/dashboard_screen.dart';
 import 'package:pikc_app/screens/login_screen/login_screen.dart';
+import 'package:pikc_app/screens/nav/nav_screen.dart';
 import 'package:pikc_app/utils/assets_constants.dart';
 import 'package:pikc_app/utils/theme_constants.dart';
 
