@@ -144,6 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   "Make Right Choices\n\nFor Your Health !",
                   style: Theme.of(context).textTheme.headline4!.copyWith(
                       color: kColorWhite, fontWeight: FontWeight.w900),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Column(
