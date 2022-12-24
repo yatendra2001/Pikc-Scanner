@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:pikc_app/keys.dart';
 import 'dart:io';
 
 import 'package:pikc_app/repositories/ocr/base_ocr_repository.dart';
@@ -17,8 +18,7 @@ class OcrRepository extends BaseOcrRepository {
     var uri = Uri.parse(
         "https://eastus.api.cognitive.microsoft.com/vision/v3.1/ocr?language=unk&detectOrientation=true");
     var request = http.Request("POST", uri)
-      ..headers['Ocp-Apim-Subscription-Key'] =
-          "e71f290840e14cf1b079542c726cfb59"
+      ..headers['Ocp-Apim-Subscription-Key'] = azureAPIKey
       ..headers['Content-Type'] = "application/octet-stream"
       ..bodyBytes = bytes;
 

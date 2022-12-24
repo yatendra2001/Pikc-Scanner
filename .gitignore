@@ -31,6 +31,7 @@
 .pub/
 /build/
 /lib/utils/chemicals_list_constant.dart
+/lib/keys.dart
 
 
 # Web related
