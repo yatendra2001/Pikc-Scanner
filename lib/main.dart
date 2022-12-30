@@ -10,6 +10,8 @@ import 'package:pikc_app/config/named_routes_map.dart';
 import 'package:pikc_app/config/route_generator.dart';
 import 'package:pikc_app/repositories/auth/auth_repository.dart';
 import 'package:pikc_app/repositories/ocr/ocr_repository.dart';
+import 'package:pikc_app/repositories/storage/storage_repository.dart';
+import 'package:pikc_app/screens/history_screen/cubit/history_cubit.dart';
 import 'package:pikc_app/screens/nav/cubit/bottom_nav_bar_cubit.dart';
 import 'package:pikc_app/screens/screens.dart';
 import 'package:sizer/sizer.dart';
@@ -36,6 +38,8 @@ class MyApp extends StatelessWidget {
           providers: [
             RepositoryProvider<AuthRepository>(create: (_) => AuthRepository()),
             RepositoryProvider<OcrRepository>(create: (_) => OcrRepository()),
+            RepositoryProvider<StorageRepository>(
+                create: (_) => StorageRepository()),
           ],
           child: MultiBlocProvider(
             providers: [
@@ -54,6 +58,10 @@ class MyApp extends StatelessWidget {
               ),
               BlocProvider<BottomNavBarCubit>(
                 create: (context) => BottomNavBarCubit(),
+              ),
+              BlocProvider<HistoryCubit>(
+                create: (context) => HistoryCubit(
+                    storageRepository: context.read<StorageRepository>()),
               ),
             ],
             child: MaterialApp(

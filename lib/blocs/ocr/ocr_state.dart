@@ -3,18 +3,18 @@ part of 'ocr_bloc.dart';
 enum OcrStatus { initial, started, completed, failed }
 
 class OcrState extends Equatable {
-  final List<String> scannedChemicalsList;
-  final OcrStatus ocrStatus;
-  final Failure failure;
+  List<String> scannedChemicalsList;
+  OcrStatus ocrStatus;
+  Failure failure;
 
-  const OcrState({
+  OcrState({
     required this.scannedChemicalsList,
     required this.ocrStatus,
     required this.failure,
   });
 
   factory OcrState.initial() {
-    return const OcrState(
+    return OcrState(
       scannedChemicalsList: [],
       ocrStatus: OcrStatus.initial,
       failure: Failure(),

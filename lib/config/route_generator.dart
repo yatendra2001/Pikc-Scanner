@@ -20,6 +20,8 @@ class RouteGenerator {
         return SplashScreen.route();
       case LoginScreen.routeName:
         return LoginScreen.route();
+      case NavScreen.routeName:
+        return NavScreen.route();
       case PhoneScreen.routeName:
         return PhoneScreen.route();
       case OtpScreen.routeName:

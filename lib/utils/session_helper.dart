@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class SessionHelper {
   static String? displayName;
   static String? firstName;
@@ -8,6 +10,12 @@ class SessionHelper {
   static String? age;
   static String? uid;
   static String? profileImageUrl;
+
+  static File? currentFile;
+  static String? currentImageUrl;
+  static List<String>? currentToxicChemicalsList;
+
+  static bool isThroughHistory = false;
 }
 
 class SessionHelperEmpty {
