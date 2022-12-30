@@ -32,6 +32,7 @@
 /build/
 /lib/utils/chemicals_list_constant.dart
 /lib/keys.dart
+/android/app/google-services.json
 
 
 # Web related

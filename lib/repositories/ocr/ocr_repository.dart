@@ -54,6 +54,6 @@ class OcrRepository extends BaseOcrRepository {
         toxicChemicalsList.add(str);
       }
     }
-    return wordsInText;
+    return toxicChemicalsList;
   }
 }
