@@ -56,5 +56,7 @@
 	<string>Scan photos through gallery</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Scan photos through camera</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>

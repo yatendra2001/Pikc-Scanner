@@ -4,6 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:pikc_app/repositories/ocr/ocr_repository.dart';
+import 'package:pikc_app/repositories/storage/storage_repository.dart';
+import 'package:pikc_app/screens/history_screen/cubit/history_cubit.dart';
+import 'package:pikc_app/utils/session_helper.dart';
 
 import '../../models/models.dart';
 
@@ -22,14 +25,17 @@ class OcrBloc extends Bloc<OcrEvent, OcrState> {
       yield (state.copyWith(ocrStatus: OcrStatus.started));
       try {
         final chemicals =
-            await ocrRepository.getTextFromImage(file: event.file);
+            await ocrRepository.getToxicChemicalsFromImage(file: event.file);
+        SessionHelper.currentImageUrl = await StorageRepository()
+            .uploadPostImage(image: SessionHelper.currentFile!);
+        SessionHelper.currentToxicChemicalsList = chemicals;
         yield (state.copyWith(
             ocrStatus: OcrStatus.completed, scannedChemicalsList: chemicals));
       } catch (err) {
-        state.copyWith(
+        yield (state.copyWith(
           ocrStatus: OcrStatus.failed,
-          failure: const Failure(message: 'We were unable to load your feed.'),
-        );
+          failure: Failure(message: err.toString()),
+        ));
       }
     }
   }

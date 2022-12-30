@@ -53,8 +53,8 @@ android {
         applicationId "com.superawesomeapps.pikc_app"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 12
+        versionName "1.1.2"
         multiDexEnabled true
     }
 

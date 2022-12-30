@@ -16,7 +16,7 @@ class StandardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45.0,
+      height: 50.0,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -24,16 +24,17 @@ class StandardButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(80.0)),
             padding: const EdgeInsets.all(0.0)),
         child: Container(
-            constraints:
-                BoxConstraints(maxWidth: size.width * 0.65, minHeight: 50.0),
+            constraints: BoxConstraints(
+                maxWidth: size.width * 0.75, minHeight: size.height * 0.4),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [kGradientStartingColor, kGradientEndingColor],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(30.0)),
+              gradient: const LinearGradient(
+                colors: [kGradientStartingColor, kGradientEndingColor],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(30.0),
+            ),
             child: child),
       ),
     );
