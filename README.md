@@ -22,7 +22,7 @@
   <p align="center">
     An app that let's you know if a product is harmful or not based on it's ingredients.
     <br />
-    <a href="https://youtu.be/LrnHIeX0i8I">View Prototype</a>
+    <a href="https://youtu.be/mrUnkKWOz3U">View Prototype</a>
   </p>
 </div>
 
@@ -31,7 +31,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://youtu.be/LrnHIeX0i8I)
+[![Product Name Screen Shot][product-screenshot]](https://youtu.be/mrUnkKWOz3U)
 
 Pikc is a cross-platform mobile application built using flutter that lets you scan ingredients behind packaged products (food and cosmetics) to figure out if it is toxins free or not. Users can either capture ingredients' picture through a camera or take a screenshot and upload it on Pikc.
 
@@ -140,5 +140,5 @@ Project Link: [https://github.com/yatendra2001/Pikc-Scanner](https://github.com/
 [license-url]: https://github.com/yatendra2001/Pikc-Scanner/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/yatendra-kumar-r2001/
-[product-screenshot]: assets/images/pikc_background.png
+[product-screenshot]: assets/images/pikc_background_new.png
 
