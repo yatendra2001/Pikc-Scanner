@@ -17,7 +17,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/yatendra2001/Pikc-Scanner">
-    <img src="assets/playstore.png"  alt="Logo" width="150" height="150" >
+    <img src="https://firebasestorage.googleapis.com/v0/b/pikc-scanner.appspot.com/o/GitHubPikc%2FPIKC_Logo_Light.png?alt=media&token=6353b25b-9925-4ebb-8d91-274b1e82246a"  alt="Logo" width="200" height="200" >
   </a>
   <p align="center">
     An app that let's you know if a product is harmful or not based on it's ingredients.
@@ -38,6 +38,9 @@ Pikc is a cross-platform mobile application built using flutter that lets you sc
 ### How Does It Work?
 
 User selects or captures an image → this image is provided to google text recognition API → API converts this image into readable text and returns a string → string gets split into words → each word goes through a list of toxic chemicals → If this word is present in the toxic chemicals list, it gets displayed on the result screen otherwise product is good to buy
+
+
+![Group 6](https://firebasestorage.googleapis.com/v0/b/pikc-scanner.appspot.com/o/GitHubPikc%2Fpikc_architecture.png?alt=media&token=f5449e0c-4610-4560-8a57-c9feb444b356)
 
 
 ### Built With
@@ -140,5 +143,5 @@ Project Link: [https://github.com/yatendra2001/Pikc-Scanner](https://github.com/
 [license-url]: https://github.com/yatendra2001/Pikc-Scanner/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/yatendra-kumar-r2001/
-[product-screenshot]: assets/images/pikc_background_new.png
+[product-screenshot]: https://firebasestorage.googleapis.com/v0/b/pikc-scanner.appspot.com/o/GitHubPikc%2Fpikc_background_new.png?alt=media&token=528dda8e-8423-4de4-9799-fcc1bae39d2c
 
